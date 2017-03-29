@@ -1,6 +1,7 @@
-from flask import Flask, request
 import requests
+from flask import Flask, request
 
+from app.states.
 
 # print a nice greeting.
 def say_hello(username = "World"):
@@ -46,6 +47,7 @@ def handle_incoming_messages():
     print('the message is: ', data['entry'][0]['messaging'][0]['message'])
     try:
         message = data['entry'][0]['messaging'][0]['message']['text']
+
     except KeyError:
         reply(sender, 'oops, something went wrong')
         return 'ok'
