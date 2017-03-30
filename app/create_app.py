@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_bcrypt import Bcrypt
 import os
 
 from view import WebhookView
