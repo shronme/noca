@@ -62,9 +62,9 @@ from app.create_app import create_app
 #     return request.args['hub.challenge']
 
 # run the app.
-if __name__ == "__main__":
-    # Setting debug to True enables debug output. This line should be
-    # removed before deploying a production app.
-    application = create_app()
-    application.debug = True
-    application.run()
+
+# Setting debug to True enables debug output. This line should be
+# removed before deploying a production app.
+application = create_app()
+application.debug = True
+application.run()
