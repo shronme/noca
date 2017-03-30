@@ -2,6 +2,10 @@ import requests
 from flask.views import MethodView
 from flask import request
 
+
+
+ACCESS_TOKEN = "EAAYquG24IwkBAPigmNaZC7zKpnbmrjcxLinW9FZCKqmTkuuoN3Jaddb505v9FCWZAZBc5exqutYRKRWZBzoSmsohrpQ0K0qV621GTk4FGaISlky6qN9Gjx07sXXHVvg5HaVkj0ZBbEyyjnbmlZAILoc3kXR5HjV0XfUjabVyhtnAAZDZD"
+
 class WebhookView(MethodView):
 	def post(self):
 		data = request.json
@@ -25,7 +29,7 @@ class WebhookView(MethodView):
 		return request.args['hub.challenge']
 
 
-	ACCESS_TOKEN = "EAAYquG24IwkBAPigmNaZC7zKpnbmrjcxLinW9FZCKqmTkuuoN3Jaddb505v9FCWZAZBc5exqutYRKRWZBzoSmsohrpQ0K0qV621GTk4FGaISlky6qN9Gjx07sXXHVvg5HaVkj0ZBbEyyjnbmlZAILoc3kXR5HjV0XfUjabVyhtnAAZDZD"
+	
 
 
 	def reply(self, user_id, msg):
