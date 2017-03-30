@@ -75,6 +75,7 @@ class WebhookView(MethodView):
 					}
 				}
 		    }
+	    }
 	    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
 	    print(resp.content)
 
