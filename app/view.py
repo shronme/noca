@@ -1,5 +1,5 @@
 from flask.views import MethodView
- 
+from flask import request
 
 class WebhookView(MethodView):
 	def post(self):
