@@ -1,7 +1,6 @@
 import requests
 from flask import Flask, request
 
-from app.states.
 
 # print a nice greeting.
 def say_hello(username = "World"):
