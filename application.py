@@ -67,8 +67,3 @@ from app.create_app import create_app
 # removed before deploying a production app.
 application = create_app()
 
-if __name__ == "__main__":
-    # Setting debug to True enables debug output. This line should be
-    # removed before deploying a production app.
-    application.debug = True
-    application.run() 
