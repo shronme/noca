@@ -2,7 +2,7 @@ from flask.views import MethodView
  
 
 class WebhookView(MethodView):
-	def post():
+	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
@@ -20,5 +20,5 @@ class WebhookView(MethodView):
 
 		return 'ok'
 
-	def get():
+	def get(self):
 		return request.args['hub.challenge']
