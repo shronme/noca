@@ -66,5 +66,3 @@ from app.create_app import create_app
 # Setting debug to True enables debug output. This line should be
 # removed before deploying a production app.
 application = create_app()
-application.debug = True
-application.run()
