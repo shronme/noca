@@ -20,8 +20,8 @@ class WebhookView(MethodView):
 		if (user):
 			self.reply(sender, 'Hi, thanks for coming back')
 		else:
-			user = {'id': sender}
-			user = user_collection.insert_one(user).inserted_id
+			user.fb_id = sender
+			user.save()
 			print('user id is: ', user)
 			self.reply(sender, 'Hi, thanks for showing interest in NoCa Pay.\nWould you like to register for our service?')
 
