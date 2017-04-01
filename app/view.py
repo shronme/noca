@@ -13,17 +13,17 @@ class WebhookView(MethodView):
 	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
-
+		fb_user = get_user_details(sender)
 		
 		user = User.objects(fb_id=sender)
 
 		if (user):
-			self.reply(sender, 'Hi, thanks for coming back')
+			self.reply(sender, 'Hi {}, thanks for coming back'.format(fb_user['first_name']))
 		else:
-			user = User(fb_id=sender)
+			user = User(fb_id=sender,state='new')
 			user.save()
 			print('user id is: ', user.fb_id)
-			self.reply(sender, 'Hi, thanks for showing interest in NoCa Pay.\nWould you like to register for our service?')
+			self.reply(sender, 'Hi {} , thanks for showing interest in NoCa Pay.\nWould you like to register for our service?'.format(fb_user['first_name']))
 
 
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
@@ -98,24 +98,11 @@ class WebhookView(MethodView):
 	    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
 	    print(resp.content)
 
-
-	# def handle_incoming_messages(self):
-	#     data = request.json
-	#     sender = data['entry'][0]['messaging'][0]['sender']['id']
-	#     print('the message is: ', data['entry'][0]['messaging'][0]['message'])
-	#     try:
-	#         message = data['entry'][0]['messaging'][0]['message']['text']
-
-	#     except KeyError:
-	#         reply(sender, 'oops, something went wrong')
-	#         return 'ok'
-	#     try:
-	#         reply(sender, 'Your message backwards is {}'.format(message[::-1]))
-	#     except UnicodeEncodeError:
-	#         reply(sender, 'oops, something went wrong')
-	#         return 'ok'
-
-	#     return "ok"
-
 	def handle_verification(self):
 	    return request.args['hub.challenge']
+
+    def get_user_details(self, user_id):
+    	user = requests.get('{url}/{user}/{token}'.format(url='https://graph.facebook.com/v2.6', user=user_id, token=ACCESS_TOKEN))
+    	return user
+
+

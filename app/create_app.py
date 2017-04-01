@@ -13,24 +13,6 @@ def create_app():
 
     app = Flask(__name__)
 
-
-    # try:
-    #     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('POSTGRES_CONNECTION') + os.environ.get('SQLALCHEMY_DATABASE_URI')
-    # except TypeError:
-    #     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ron:admin@localhost/test'
-
-    # print 'app.config[SQLALCHEMY_DATABASE_URI] =', app.config['SQLALCHEMY_DATABASE_URI']
-
-    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    # app.config['SALT'] = '3W8y%,pP@)'
-    # app.app_context().push()
-    # init_views(app)
-    # app.bcrypt = Bcrypt(app)
-
-
-    # EB looks for an 'application' callable by default.
-    # application = Flask(__name__)
-    #mongo_client = MongoClient('mongodb://ec2-52-209-229-216.eu-west-1.compute.amazonaws.com:27017')
     app.db = connect('noca_db', host='mongodb://ec2-52-209-229-216.eu-west-1.compute.amazonaws.com', port=27017)
     # add a rule for the pagez.
     app.add_url_rule('/', 'index', (lambda: header_text +
