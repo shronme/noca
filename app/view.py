@@ -13,7 +13,7 @@ class WebhookView(MethodView):
 	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
-		fb_user = get_user_details(sender)
+		fb_user = self.get_user_details(sender)
 		
 		user = User.objects(fb_id=sender)
 
@@ -23,7 +23,9 @@ class WebhookView(MethodView):
 			user = User(fb_id=sender,state='new')
 			user.save()
 			print('user id is: ', user.fb_id)
-			self.reply(sender, 'Hi {} , thanks for showing interest in NoCa Pay.\nWould you like to register for our service?'.format(fb_user['first_name']))
+			self.reply(sender, 
+				'Hi {} , thanks for showing interest in NoCa Pay.\nWould you like to register for our service?'.format(
+					fb_user['first_name']))
 
 
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
@@ -44,7 +46,22 @@ class WebhookView(MethodView):
 	def get(self):
 		return request.args['hub.challenge']
 
-# data = {
+
+	def reply(self, user_id, msg):
+    	data = {
+	        "recipient": {"id": user_id},
+	        "message": {"text": msg}
+	    }
+	    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
+	    print(resp.content)
+
+	def handle_verification(self):
+ 	   return request.args['hub.challenge']
+
+	def get_user_details(self, user_id):
+    	user = requests.get('{url}/{user}/{token}'.format(url='https://graph.facebook.com/v2.6', user=user_id, token=ACCESS_TOKEN))
+    	return user
+#data = {
 # 	        "recipient": {"id": user_id},
 # 	        'message': {
 # 		        'attachment': {
@@ -87,22 +104,4 @@ class WebhookView(MethodView):
 # 				}
 # 		    }
 # 	    }
-	
-
-
-	def reply(self, user_id, msg):
-	    data = {
-	        "recipient": {"id": user_id},
-	        "message": {"text": msg}
-	    }
-	    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-	    print(resp.content)
-
-    def handle_verification(self):
-	    return request.args['hub.challenge']
-
-    def get_user_details(self, user_id):
-    	user = requests.get('{url}/{user}/{token}'.format(url='https://graph.facebook.com/v2.6', user=user_id, token=ACCESS_TOKEN))
-    	return user
-
 
