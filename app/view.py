@@ -7,7 +7,7 @@ from app.models.user import User
 
 
 
-ACCESS_TOKEN = "EAAYquG24IwkBAPigmNaZC7zKpnbmrjcxLinW9FZCKqmTkuuoN3Jaddb505v9FCWZAZBc5exqutYRKRWZBzoSmsohrpQ0K0qV621GTk4FGaISlky6qN9Gjx07sXXHVvg5HaVkj0ZBbEyyjnbmlZAILoc3kXR5HjV0XfUjabVyhtnAAZDZD"
+ACCESS_TOKEN = 'EAAYquG24IwkBAPigmNaZC7zKpnbmrjcxLinW9FZCKqmTkuuoN3Jaddb505v9FCWZAZBc5exqutYRKRWZBzoSmsohrpQ0K0qV621GTk4FGaISlky6qN9Gjx07sXXHVvg5HaVkj0ZBbEyyjnbmlZAILoc3kXR5HjV0XfUjabVyhtnAAZDZD'
 
 class WebhookView(MethodView):
 	def post(self):
@@ -59,7 +59,10 @@ class WebhookView(MethodView):
  	   return request.args['hub.challenge']
 
 	def get_user_details(self, user_id):
-    	user = requests.get('{url}/{user}/{token}'.format(url='https://graph.facebook.com/v2.6', user=user_id, token=ACCESS_TOKEN))
+    	user = requests.get('{}/{}/{}'.format(
+    		'https://graph.facebook.com/v2.6',
+    		user_id,
+    		ACCESS_TOKEN))
     	return user
 #data = {
 # 	        "recipient": {"id": user_id},
