@@ -22,7 +22,7 @@ class WebhookView(MethodView):
 		else:
 			user.fb_id = sender
 			user.save()
-			print('user id is: ', user)
+			print('user id is: ', user.fb_id)
 			self.reply(sender, 'Hi, thanks for showing interest in NoCa Pay.\nWould you like to register for our service?')
 
 
