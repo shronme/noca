@@ -10,14 +10,12 @@ from app.models.user import User
 ACCESS_TOKEN = "EAAYquG24IwkBAPigmNaZC7zKpnbmrjcxLinW9FZCKqmTkuuoN3Jaddb505v9FCWZAZBc5exqutYRKRWZBzoSmsohrpQ0K0qV621GTk4FGaISlky6qN9Gjx07sXXHVvg5HaVkj0ZBbEyyjnbmlZAILoc3kXR5HjV0XfUjabVyhtnAAZDZD"
 
 class WebhookView(MethodView):
-	def get_fb_user(self, fb_id):
-    	user = requests.get('https://graph.facebook.com/v2.6/{}/{}'.format(fb_id,ACCESS_TOKEN))
-    	return user
+	
 
 	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
-		fb_user = self.get_fb_user(sender)
+		fb_user = requests.get('https://graph.facebook.com/v2.6/' + string(sender))
 		
 		user = User.objects(fb_id=sender)
 
