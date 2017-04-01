@@ -15,7 +15,7 @@ class WebhookView(MethodView):
 	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
-		fb_user = requests.get('https://graph.facebook.com/v2.6/' + str(sender) + '/' + ACCESS_TOKEN)
+		fb_user = requests.get('https://graph.facebook.com/v2.6/' + str(sender) + '?access_token=' + ACCESS_TOKEN)
 		print('fb user is: ', fb_user.json())
 		user = User.objects(fb_id=sender)
 
