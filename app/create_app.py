@@ -1,6 +1,5 @@
 from flask import Flask
-import os
-
+from pymongo import MongoClient
 from view import WebhookView
 
 
@@ -13,6 +12,7 @@ def create_app():
     footer_text = '</body>\n</html>'
 
     app = Flask(__name__)
+
 
     # try:
     #     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('POSTGRES_CONNECTION') + os.environ.get('SQLALCHEMY_DATABASE_URI')
@@ -30,7 +30,8 @@ def create_app():
 
     # EB looks for an 'application' callable by default.
     # application = Flask(__name__)
-
+    mongo_client = MongoClient('mongodb://ec2-52-209-229-216.eu-west-1.compute.amazonaws.com:27017')
+    app.db = mongo_client.noca_db
     # add a rule for the pagez.
     app.add_url_rule('/', 'index', (lambda: header_text +
         instructions + footer_text))

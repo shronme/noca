@@ -1,6 +1,7 @@
 import requests
 from flask.views import MethodView
 from flask import request
+from flask import current_app
 
 
 
@@ -10,6 +11,19 @@ class WebhookView(MethodView):
 	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
+
+		user_collection = current_app.db.user_collection
+		user = user_collection.find_one({'id': sender})
+
+		if (user):
+			self.reply(sender, 'Hi, thanks for coming back')
+		else:
+			user = {'id': sender}
+			user = user_collection.insert_one(user).inserted_id
+			print('user id is: ', user)
+			self.reply(sender, 'Hi, thanks for showing interest in NoCa Pay.\nWould you like to register for our service?')
+
+
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
 		try:
 		    message = data['entry'][0]['messaging'][0]['message']['text']
