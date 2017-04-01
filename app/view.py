@@ -25,7 +25,9 @@ class WebhookView(MethodView):
 			user = User(fb_id=sender,state='new')
 			user.save()
 			print('user id is: ', user.fb_id)
-			self.reply(sender, 'Hi, thanks for showing interest in NoCa Pay.\nWould you like to register for our service?')
+			self.reply(sender, 
+				'Hi {}, thanks for showing interest in NoCa Pay.\nWould you like to register for our service?'.format(
+					fb_user['first_name']))
 
 
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
