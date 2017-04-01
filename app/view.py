@@ -57,9 +57,6 @@ class WebhookView(MethodView):
 	    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
 	    print(resp.content)
 
-	def handle_verification(self):
-	    return request.args['hub.challenge']
-
     def get_fb_details(self, fb_id):
     	return requests.get(
     		'https://graph.facebook.com/v2.6/' + str(fb_id) + '?access_token=' + ACCESS_TOKEN).json()
