@@ -13,7 +13,7 @@ class WebhookView(MethodView):
 	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
-
+		fb_user = self.get_fb_user(sender)
 		
 		user = User.objects(fb_id=sender)
 
@@ -43,6 +43,23 @@ class WebhookView(MethodView):
 
 	def get(self):
 		return request.args['hub.challenge']
+
+	def reply(self, user_id, msg):
+	    data = {
+	        "recipient": {"id": user_id},
+	        "message": {"text": msg}
+	    }
+	    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
+	    print(resp.content)
+
+	def handle_verification(self):
+	    return request.args['hub.challenge']
+
+    def get_fb_user(self, fb_id):
+    	user = requests.get('https://graph.facebook.com/v2.6/{}/{}'.format(fb_id,ACCESS_TOKEN))
+    	return user
+
+
 
 # data = {
 # 	        "recipient": {"id": user_id},
@@ -89,14 +106,3 @@ class WebhookView(MethodView):
 # 	    }
 	
 
-
-	def reply(self, user_id, msg):
-	    data = {
-	        "recipient": {"id": user_id},
-	        "message": {"text": msg}
-	    }
-	    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-	    print(resp.content)
-
-	def handle_verification(self):
-	    return request.args['hub.challenge']
