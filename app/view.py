@@ -20,7 +20,8 @@ class WebhookView(MethodView):
 		user = User.objects(fb_id=sender)
 
 		if (user):
-			self.reply(sender, 'Hi, thanks for coming back')
+			self.reply(sender, 'Hi {}, thanks for coming back'.format(
+				fb_user['first_name']))
 		else:
 			user = User(fb_id=sender,state='new')
 			user.save()
