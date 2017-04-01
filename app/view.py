@@ -13,7 +13,7 @@ class WebhookView(MethodView):
 	def post(self):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
-		fb_user = self.get_user_details(sender)
+		#fb_user = self.get_user_details(sender)
 		
 		user = User.objects(fb_id=sender)
 
