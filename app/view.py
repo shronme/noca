@@ -1,7 +1,9 @@
 import requests
+from mongoengine import *
 from flask.views import MethodView
 from flask import request
 from flask import current_app
+from app.models.user import User
 
 
 
@@ -12,8 +14,8 @@ class WebhookView(MethodView):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
 
-		user_collection = current_app.db.user_collection
-		user = user_collection.find_one({'id': sender})
+		
+		user = User.objects(fb_id=sender)
 
 		if (user):
 			self.reply(sender, 'Hi, thanks for coming back')

@@ -1,5 +1,5 @@
 from flask import Flask
-from pymongo import MongoClient
+from mongoengine import connect
 from view import WebhookView
 
 
@@ -30,8 +30,8 @@ def create_app():
 
     # EB looks for an 'application' callable by default.
     # application = Flask(__name__)
-    mongo_client = MongoClient('mongodb://ec2-52-209-229-216.eu-west-1.compute.amazonaws.com:27017')
-    app.db = mongo_client.noca_db
+    #mongo_client = MongoClient('mongodb://ec2-52-209-229-216.eu-west-1.compute.amazonaws.com:27017')
+    app.db = connect('noca_db', host='mongodb://ec2-52-209-229-216.eu-west-1.compute.amazonaws.com', port=27017)
     # add a rule for the pagez.
     app.add_url_rule('/', 'index', (lambda: header_text +
         instructions + footer_text))
