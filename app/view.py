@@ -16,12 +16,12 @@ class WebhookView(MethodView):
 		data = request.json
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
 		fb_user = requests.get('https://graph.facebook.com/v2.6/' + str(sender))
-		
+		print('fb user is: ', fb_user)
 		user = User.objects(fb_id=sender)
 
 		if (user):
 			self.reply(sender, 'Hi {}, thanks for coming back'.format(
-				fb_user['first_name']))
+				fb_user.json()['first_name']))
 		else:
 			user = User(fb_id=sender,state='new')
 			user.save()
