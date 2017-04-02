@@ -9,7 +9,7 @@ class NewUserState():
 		return 'Hi {}, Welcome to NoCa Pay'
 
 	def next_state(self):
-		return NewUserState
+		return 'new_user'
 
 
 
