@@ -4,6 +4,7 @@ from flask.views import MethodView
 from flask import request
 from flask import current_app
 from app.models.user import User
+from app.states.user_states import *
 
 
 
@@ -19,16 +20,15 @@ class WebhookView(MethodView):
 		print('fb user is: ', fb_user.json())
 		user = User.objects(fb_id=sender)
 
-		if (user):
-			self.reply(sender, 'Hi {}, thanks for coming back'.format(
-				fb_user.json()['first_name']))
-		else:
-			user = User(fb_id=sender,state='new')
+		
+			# self.reply(sender, 'Hi {}, thanks for coming back'.format(
+			# 	fb_user.json()['first_name']))
+		if not user:
+			user = User(fb_id=sender,state=NewUserState, name=fb_user.json()['first_name'])
 			user.save()
-			print('user id is: ', user.fb_id)
-			self.reply(sender, 
-				'Hi {}, thanks for showing interest in NoCa Pay.\nWould you like to register for our service?'.format(
-					fb_user['first_name']))
+
+		state = user.state(user)
+		
 
 
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
@@ -38,6 +38,14 @@ class WebhookView(MethodView):
 		except KeyError:
 		    self.reply(sender, 'oops, something went wrong')
 		    return 'ok'
+
+	    response = state.run(message)
+		user.state = state.next_state()
+		user.save()
+		print('user id is: ', user.fb_id)
+		self.reply(sender, 
+			response)
+		
 		try:
 		    self.reply(sender, 'Your message backwards is {}'.format(message[::-1]))
 		except UnicodeEncodeError:

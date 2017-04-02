@@ -1,4 +1,17 @@
 
+class NewUserState():
+	def __init__(self, user):
+		self.user = user
+
+		def run(self, message):
+
+			return 'Hi {}, Welcome to NoCa Pay'
+
+		def next_state(self):
+			return NewUserState
+
+
+
 
 class GetInfoState():
 
