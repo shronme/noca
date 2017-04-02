@@ -20,7 +20,6 @@ class WebhookView(MethodView):
 		print('fb user is: ', fb_user.json())
 		user = User.objects(fb_id=sender).first()
 
-
 		# self.reply(sender, 'Hi {}, thanks for coming back'.format(
 		# 	fb_user.json()['first_name']))
 		if not user:
@@ -29,7 +28,8 @@ class WebhookView(MethodView):
 		if not user.state:
 			user.state = 'new_user'
 			user.save()
-		
+
+
 		print('user state is: ', user.state)
 		state = states_dict[user.state](user)
 
@@ -41,7 +41,7 @@ class WebhookView(MethodView):
 			self.reply(sender, 'oops, something went wrong')
 			return 'ok'
 
-		response = state.run(message)
+		response = state.run(data)
 		user.state = state.next_state()
 		user.save()
 		print('user id is: ', user.fb_id)

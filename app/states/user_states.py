@@ -6,6 +6,7 @@ class NewUserState():
 		self.user = user
 
 	def run(self, message):
+		sender = message['entry'][0]['messaging'][0]['sender']['id']
 		if not self.user.name:
 			fb_user = requests.get('https://graph.facebook.com/v2.6/' + str(sender) + '?access_token=' + ACCESS_TOKEN)
 			self.user.name = fb_user.json()['first_name']
