@@ -1,3 +1,4 @@
+import requests
 
 
 class NewUserState():
@@ -5,6 +6,10 @@ class NewUserState():
 		self.user = user
 
 	def run(self, message):
+		if not self.user.name:
+			fb_user = requests.get('https://graph.facebook.com/v2.6/' + str(sender) + '?access_token=' + ACCESS_TOKEN)
+			self.user.name = fb_user.json()['first_name']
+			self.user.save()
 		return 'Hi {}, Welcome to NoCa Pay'.format(self.user.name)
 
 	def next_state(self):

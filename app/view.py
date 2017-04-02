@@ -29,6 +29,7 @@ class WebhookView(MethodView):
 		if not user.state:
 			user.state = 'new_user'
 			user.save()
+		
 		print('user state is: ', user.state)
 		state = states_dict[user.state](user)
 
