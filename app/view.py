@@ -30,7 +30,7 @@ class WebhookView(MethodView):
 			user.state = 'new_user'
 			user.save()
 		print('user state is: ', user.state)
-		state = states_dict[user.state]()
+		state = states_dict[user.state](user)
 
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
 		
