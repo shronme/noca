@@ -20,37 +20,35 @@ class WebhookView(MethodView):
 		print('fb user is: ', fb_user.json())
 		user = User.objects(fb_id=sender)
 
-		
-			# self.reply(sender, 'Hi {}, thanks for coming back'.format(
-			# 	fb_user.json()['first_name']))
+
+		# self.reply(sender, 'Hi {}, thanks for coming back'.format(
+		# 	fb_user.json()['first_name']))
 		if not user:
 			user = User(fb_id=sender,state=NewUserState, name=fb_user.json()['first_name'])
 			user.save()
 
 		state = user.state(user)
-		
-
 
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
+		
 		try:
-		    message = data['entry'][0]['messaging'][0]['message']['text']
-
+			message = data['entry'][0]['messaging'][0]['message']['text']
 		except KeyError:
-		    self.reply(sender, 'oops, something went wrong')
-		    return 'ok'
+			self.reply(sender, 'oops, something went wrong')
+			return 'ok'
 
-	    response = state.run(message)
+		response = state.run(message)
 		user.state = state.next_state()
 		user.save()
 		print('user id is: ', user.fb_id)
 		self.reply(sender, 
-			response)
-		
+		response)
+
 		try:
-		    self.reply(sender, 'Your message backwards is {}'.format(message[::-1]))
+			self.reply(sender, 'Your message backwards is {}'.format(message[::-1]))
 		except UnicodeEncodeError:
-		    self.reply(sender, 'oops, something went wrong')
-		    return 'ok'
+			self.reply(sender, 'oops, something went wrong')
+			return 'ok'
 
 		return 'ok'
 
