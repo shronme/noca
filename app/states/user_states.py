@@ -5,8 +5,7 @@ class NewUserState():
 		self.user = user
 
 	def run(self, message):
-
-		return 'Hi {}, Welcome to NoCa Pay'
+		return 'Hi {}, Welcome to NoCa Pay'.format(self.user.name)
 
 	def next_state(self):
 		return 'new_user'
