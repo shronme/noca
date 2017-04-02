@@ -1,7 +1,4 @@
 
-states_dict = {
-	'new_user': NewUserState,
-}
 
 class NewUserState():
 	def __init__(self, user):
@@ -61,3 +58,8 @@ class GetPaymentState():
 
 	def next_step(self):
 		return 'get_payment'
+
+
+states_dict = {
+	'new_user': NewUserState,
+}
