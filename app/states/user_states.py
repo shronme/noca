@@ -1,4 +1,8 @@
 
+states_dict = {
+	'new_user': NewUserState,
+}
+
 class NewUserState():
 	def __init__(self, user):
 		self.user = user
