@@ -28,28 +28,20 @@ Author: Eric Bidelman (ericbidelman@chromium.org)
 </head>
 <body>
 
-<details>
-  <summary>What's this?</summary>
-  <div>
-    <p>Example of the <a href="http://dev.w3.org/2011/webrtc/editor/getusermedia.html" target="_blank" title="Spec link" alt="Spec link"><code>navigator.getUserMedia()</code></a>
-    API for capturing audio and video, sans plugin. This demo also shows the video being rendered
-    to while <a href="/static/css/filters/index.html">CSS filters</a> are applied in realtime (click the video).</p>
-    <p><b>Support:</b> Chrome 18.0.1009.0 with the <code>--enable-media-stream</code> flag set. Chrome 20.0.1125.0 changed
-      the method signature to the updated spec: <code>getUserMedia({video: true})</code></p>
-  </div>
-</details>
-
 <article>
- <h1>CSS Filters Photobooth</h1>
- <section id="app" hidden>
-<div class="container"><span id="live">LIVE</span><video id="monitor" autoplay onclick="changeFilter(this)" title="Click me to see different filters"></video></div>
-  <p>Click the video to see different CSS filters</p>
- </section>
- <p><button onclick="init(this)">Capture</button></p>
- <div id="splash">
-  <p id="errorMessage">&uarr;<br>Click to begin</p>
- </div>
- <div id="gallery"></div>
+	<h1>CSS Filters Photobooth</h1>
+	<section id="app" >
+		<div class="container"><span id="live">LIVE</span><video id="monitor" autoplay onclick="changeFilter(this)" title="Click me to see different filters"></video></div>
+		<p>Click the video to see different CSS filters</p>
+	</section>
+
+	<p><button onclick="init(this)">Capture</button></p>
+
+	<div id="splash">
+		<p id="errorMessage">&uarr;<br>Click to begin</p>
+	</div>
+
+	<div id="gallery"></div>
 </article>
 <canvas id="photo" style="display:none"></canvas>
 
