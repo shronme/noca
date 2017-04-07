@@ -22,7 +22,6 @@ Author: Eric Bidelman (ericbidelman@chromium.org)
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
 <link href="tools/common.css" rel="stylesheet" type="text/css">
-<script src="scripts/auth.js"></script>
 <title>Photobooth</title>
 
 </head>
@@ -31,7 +30,10 @@ Author: Eric Bidelman (ericbidelman@chromium.org)
 <article>
 	<h1>CSS Filters Photobooth</h1>
 	<section id="app" >
-		<div class="container"><span id="live">LIVE</span><video id="monitor" autoplay onclick="changeFilter(this)" title="Click me to see different filters"></video></div>
+		<div class="container">
+			<span id="live">LIVE</span>
+			<video id="monitor" autoplay onclick="changeFilter(this)" title="Click me to see different filters"></video>
+		</div>
 		<p>Click the video to see different CSS filters</p>
 	</section>
 
@@ -50,4 +52,6 @@ Author: Eric Bidelman (ericbidelman@chromium.org)
 <script>CFInstall.check({mode: 'overlay'});</script>
 <![endif]-->
 </body>
+<script src="scripts/auth.js"></script>
+
 </html>
