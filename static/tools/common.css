@@ -42,8 +42,8 @@ article {
 }
 #monitor {
   /*-webkit-transform: scaleX(-1);*/
-  height: 300px;
-  /*-webkit-box-reflect: below 20px -webkit-linear-gradient(top, transparent, transparent 80%, rgba(255,255,255,0.2));*/
+  width: 100%  /*-webkit-box-reflect: below 20px -webkit-linear-gradient(top, transparent, transparent 80%, rgba(255,255,255,0.2));*/
+  height: 100%;
 }
 #live {
   position: absolute;
