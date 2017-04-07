@@ -1,6 +1,6 @@
 from flask import Flask
 from mongoengine import connect
-from view import WebhookView
+from app.view import WebhookView
 
 
 def create_app():
