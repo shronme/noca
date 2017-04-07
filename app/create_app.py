@@ -7,7 +7,7 @@ def create_app():
     header_text = '''
     <html>\n<head> <title>EB Flask Test</title> </head>\n<body>'''
     instructions = '''
-        <p><em>Hint</em>: Nocapay is coming soon!!.</p>\n'''
+        <p>Nocapay is coming soon!!.</p>\n'''
     home_link = '<p><a href="/">Back</a></p>\n'
     footer_text = '</body>\n</html>'
 
