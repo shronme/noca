@@ -28,22 +28,17 @@ Author: Eric Bidelman (ericbidelman@chromium.org)
 <body>
 
 <article>
-	<h1>CSS Filters Photobooth</h1>
+	<h1>Face ID</h1>
 	<section id="app" >
 		<div class="container">
 			<span id="live">LIVE</span>
 			<video id="monitor" autoplay onclick="changeFilter(this)" title="Click me to see different filters"></video>
 		</div>
-		<p>Click the video to see different CSS filters</p>
+		<p><button onclick="init(this)">Capture</button></p>
 	</section>
 
-	<p><button onclick="init(this)">Capture</button></p>
 
-	<div id="splash">
-		<p id="errorMessage">&uarr;<br>Click to begin</p>
-	</div>
-
-	<div id="gallery"></div>
+	
 </article>
 <canvas id="photo" style="display:none"></canvas>
 
