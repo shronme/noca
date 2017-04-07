@@ -111,7 +111,10 @@ background-size: cover;
 	height: 100%;    
 }
 
-
+.face_auth{
+	width: 100%;
+	height: 100%
+}
 .centered{
     display: inline-block;
    }
