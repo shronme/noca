@@ -3,4 +3,4 @@
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 *.pyc
-.DS_Store/*
+.DS_Store
