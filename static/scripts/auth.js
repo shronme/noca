@@ -98,7 +98,7 @@ function init(el) {
   }
   el.onclick = capture;
   el.textContent = 'Snapshot';
-  navigator.getUserMedia({video: true}, gotStream, noStream);
+   navigator.mediaDevices.getUserMedia({video: true}, gotStream, noStream);
 }
 
 window.addEventListener('keydown', function(e) {
