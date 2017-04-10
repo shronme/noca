@@ -3,6 +3,7 @@ window.URL = window.URL || window.webkitURL;
 
 var app = document.getElementById('app');
 var video = document.getElementById('monitor');
+var snapshot = document.getElementById('snapshot');
 var canvas = document.getElementById('photo');
 var effect = document.getElementById('effect');
 var gallery = document.getElementById('gallery');
@@ -32,10 +33,11 @@ function changeFilter(el) {
 function gotStream(stream) {
   if (window.URL) {
     video.src = window.URL.createObjectURL(stream);
+
   } else {
     video.src = stream; // Opera.
   }
-
+  snapshot.src = ''
   video.onerror = function(e) {
     stream.stop();
   };
