@@ -78,7 +78,7 @@ function capture() {
     ctx.drawImage(video, 0, 0);
     var img = document.createElement('img');
     img.src = canvas.toDataURL('image/png');
-
+    snapshot.src = img.src
     var angle = Math.floor(Math.random() * 36);
     var sign = Math.floor(Math.random() * 2) ? 1 : -1;
     img.style.webkitTransform = 'rotateZ(' + (sign * angle) + 'deg)';
