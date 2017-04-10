@@ -75,7 +75,7 @@ function capture() {
   intervalId = setInterval(function() {
     ctx.drawImage(video, 0, 0);
     var img = document.createElement('img');
-    img.src = canvas.toDataURL('image/webp');
+    img.src = canvas.toDataURL('image/png');
 
     var angle = Math.floor(Math.random() * 36);
     var sign = Math.floor(Math.random() * 2) ? 1 : -1;
