@@ -1,6 +1,7 @@
 from flask import Flask
-from mongoengine import connect
+from mongoengine import *
 from app.view import WebhookView
+from app.models.merchant import Merchant
 
 
 def create_app():
@@ -22,3 +23,9 @@ def create_app():
 
 
     return app
+
+def create_mock_merchant():
+    merchant = Merchant.objects(merchant_id='12345').first()
+    if not merchant:
+        merchant = Merchant(merchant_id='12345', name='Noca Store')
+        merchant.save()

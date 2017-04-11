@@ -1,5 +1,4 @@
 import datetime
-from flask import current_app
 from mongoengine import *
 
 class User(Document):
@@ -8,3 +7,4 @@ class User(Document):
     name = StringField()
     date_modified = DateTimeField(default=datetime.datetime.now)
     address = DictField()
+    attempt_counter = IntField()

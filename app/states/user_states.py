@@ -1,6 +1,6 @@
 import requests
-
-ACCESS_TOKEN = "EAAYquG24IwkBAPigmNaZC7zKpnbmrjcxLinW9FZCKqmTkuuoN3Jaddb505v9FCWZAZBc5exqutYRKRWZBzoSmsohrpQ0K0qV621GTk4FGaISlky6qN9Gjx07sXXHVvg5HaVkj0ZBbEyyjnbmlZAILoc3kXR5HjV0XfUjabVyhtnAAZDZD"
+from app.states.replies import ACCESS_TOKEN, reply
+from app.models.merchant import Merchant
 
 
 class NewUserState():
@@ -13,10 +13,13 @@ class NewUserState():
 			fb_user = requests.get('https://graph.facebook.com/v2.6/' + str(sender) + '?access_token=' + ACCESS_TOKEN)
 			self.user.name = fb_user.json()['first_name']
 			self.user.save()
-		return 'Hi {}, Welcome to NoCa Pay'.format(self.user.name)
+		reply(sender, 'Hi {}, Welcome to NoCa Pay'.format(self.user.name))
+		reply(sender, 'As a new customer your first purchase, up to £10 is on us. After that we will ask you to register in order to make further purchases.')
+
+		return self.next_state()
 
 	def next_state(self):
-		return 'new_user'
+		return 'get_payment'
 
 
 
@@ -56,8 +59,25 @@ class GetPaymentState():
 	def __init__(self, user):
 		self.user = user
 
-	def run(self):
-		return "How much would you like to pay?\n"
+	def run(self, data):
+
+		try:
+			message = data['entry'][0]['messaging'][0]['message']['text']
+		except KeyError:
+			self.reply(sender, 'oops, something went wrong')
+			return 'ok'
+		sender = message['entry'][0]['messaging'][0]['sender']['id']
+
+		if not user.attempt_counter:
+			merchant = Merchant.objects(merchant_id=message).first()
+			if merchant:
+				reply(sender, 'You are trying to make a payment at {}.\nIf not, please respond with the message: "N", otherwise please tell us how much would like to pay'.format(self.merchant.name))
+				user.attempt_counter = 1
+				user.save()
+				return ''
+		elif user.attempt_counter == 1:
+			if me
+		
 
 	def process_input(self, input):
 		print('You payment in the amount of {} was received\n'.format(input))
@@ -69,4 +89,5 @@ class GetPaymentState():
 
 states_dict = {
 	'new_user': NewUserState,
+	'get_payment': GetPaymentState
 }
