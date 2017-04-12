@@ -66,7 +66,7 @@ class GetPaymentState():
 		except KeyError:
 			self.reply(sender, 'oops, something went wrong')
 			return 'ok'
-		sender = message['entry'][0]['messaging'][0]['sender']['id']
+		sender = data['entry'][0]['messaging'][0]['sender']['id']
 
 		if not user.attempt_counter:
 			merchant = Merchant.objects(merchant_id=message).first()
