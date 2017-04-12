@@ -4,6 +4,12 @@ from app.view import WebhookView
 from app.models.merchant import Merchant
 
 
+def create_mock_merchant():
+    merchant = Merchant.objects(merchant_id='12345').first()
+    if not merchant:
+        merchant = Merchant(merchant_id='12345', name='Noca Store')
+        merchant.save()
+
 def create_app():
     header_text = '''
     <html>\n<head> <title>EB Flask Test</title> </head>\n<body>'''
@@ -20,12 +26,7 @@ def create_app():
         instructions + footer_text))
     
     app.add_url_rule('/webhook', view_func=WebhookView.as_view('webhook_view'))
-
+    create_mock_merchant()
 
     return app
 
-def create_mock_merchant():
-    merchant = Merchant.objects(merchant_id='12345').first()
-    if not merchant:
-        merchant = Merchant(merchant_id='12345', name='Noca Store')
-        merchant.save()

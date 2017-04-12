@@ -68,7 +68,7 @@ class GetPaymentState():
 			self.reply(sender, 'oops, something went wrong')
 			return 'ok'
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
-
+		print('In payment run with attempt counter {}'.format(self.user.attempt_counter))
 		if not self.user.attempt_counter:
 			merchant = Merchant.objects(merchant_id=message).first()
 			if merchant:
