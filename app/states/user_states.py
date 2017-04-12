@@ -90,7 +90,7 @@ class GetPaymentState():
 					self.user.attempt_counter = 0
 					self.user.save()
 					return ''
-				reply(sender, 'To pay {amount} at {merchant} send "y" or send the amount again'.format(amount=amount, merchant=self.merchant.name))
+				reply(sender, 'To pay {amount} at {merchant} send "y" or send the amount again'.format(amount=amount, merchant=merchant.name))
 				self.user.attempt_counter == 3
 				self.user.save()
 				return ''
