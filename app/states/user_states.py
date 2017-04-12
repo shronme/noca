@@ -76,8 +76,47 @@ class GetPaymentState():
 				user.save()
 				return ''
 		elif user.attempt_counter == 1:
-			if me
-		
+			if message.lower() == 'n':
+				reply(sender, 'Please try sendin the merchant number again.')
+				user.attempt_counter = 2
+				user.save()
+				return ''
+			else:
+				try:
+					amount = float(message)
+				except ValueError:
+					reply(sender, 'I didn\'t understand your message. I was expecting to recieve an amount. One of our agents will help you shortly.')
+					user.attempt_counter = 0
+					user.save()
+					return ''
+				reply(sender, 'To pay {amount} at {merchant} send "y" or send the amount again'.format(amount=amount, merchant=self.merchant.name))
+				user.attempt_counter == 3
+				user.save()
+				return ''
+		elif user.attempt_counter == 2:
+			merchant = Merchant.objects(merchant_id=message).first()
+			if merchant:
+				reply(sender, 'You are trying to make a payment at {}.\n If so please send us the amount, otherwise one of our agents will help you shortly'.format(merchant=self.merchant.name))
+				user.attempt_counter = 3
+				user.save()
+				return ''
+		elif user.attempt_counter == 3:
+			if message.lower() == 'y':
+				reply(sender, 'Thank you for using Nocapay. See you soon.')
+				user.attempt_counter = 0
+				user.save()
+				return ''
+			else:
+				try:
+					amount = float(message)
+				except ValueError:
+					reply(sender, 'I didn\'t understand your message. I was expecting to recieve an amount. One of our agents will help you shortly.')
+					user.attempt_counter = 0
+					user.save()
+					return ''
+				reply(sender, 'To pay {amount} at {merchant} send "y", otherwise one of our agents will help you shortly'.format(amount=amount, merchant=self.merchant.name))
+				return ''
+				
 
 	def process_input(self, input):
 		print('You payment in the amount of {} was received\n'.format(input))
