@@ -4,6 +4,7 @@ from flask.views import MethodView
 from flask import request
 from flask import current_app
 from app.models.user import User
+from app.states.replies import reply
 from app.states.user_states import *
 
 
@@ -35,19 +36,24 @@ class WebhookView(MethodView):
 
 		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
 		
-		try:
-			message = data['entry'][0]['messaging'][0]['message']['text']
-		except KeyError:
-			self.reply(sender, 'oops, something went wrong')
+		if 'message' in data['entry'][0]['messaging'][0].keys():
+			if 'text' in data['entry'][0]['messaging'][0]['message'].keys():
+				message = data['entry'][0]['messaging'][0]['message']['text']
+		elif 'postback' in data['entry'][0]['messaging'][0].keys():
+			message = in data['entry'][0]['messaging'][0]['postback']['payload']
+		else:
+			reply(sender, 'oops, something went wrong')
 			return 'ok'
 
 		response = state.run(data)
 		while response:
-			user.state = response
-			user.save()
+			if user.state != response:
+				user.state = response
+				user.save()
 
-			print('user state is: ', user.state)
-			state = states_dict[user.state](user)
+				print('user state is: ', user.state)
+				state = states_dict[user.state](user)
+		
 			response = state.run(data)
 
 
@@ -76,48 +82,3 @@ class WebhookView(MethodView):
 	    return request.args['hub.challenge']
 
     
-# data = {
-# 	        "recipient": {"id": user_id},
-# 	        'message': {
-# 		        'attachment': {
-# 		        	'type': "template",
-# 		        	'payload': {
-# 		        		'template_type': "generic",
-# 		        		'elements': [{
-# 			        		'title': "rift",
-# 			        		'subtitle': "Next-generation virtual reality",
-# 			        		'item_url': "https://www.oculus.com/en-us/rift/",
-# 			        		'image_url': "http://messengerdemo.parseapp.com/img/rift.png",
-# 			        		'buttons': [{
-# 			        			'type': "web_url",
-# 			        			'url': "https://www.oculus.com/en-us/rift/",
-# 			        			'title': "Open Web URL"
-# 		        			}, 
-# 		        			{
-# 		        				'type': "postback",
-# 		        				'title': "Call Postback",
-# 		        				'payload': "Payload for first bubble",
-# 	    				}],
-# 						}, 
-# 						{
-# 							'title': "touch",
-# 							'subtitle': "Your Hands, Now in VR",
-# 							'item_url': "https://www.oculus.com/en-us/touch/",
-# 							'image_url': "http://messengerdemo.parseapp.com/img/touch.png",
-# 							'buttons': [{
-# 								'type': "web_url",
-# 								'url': "https://www.oculus.com/en-us/touch/",
-# 								'title': "Open Web URL"
-# 							}, 
-# 							{
-# 								'type': "postback",
-# 								'title': "Call Postback",
-# 								'payload': "Payload for second bubble",
-# 							}]
-# 						}]
-# 					}
-# 				}
-# 		    }
-# 	    }
-	
-

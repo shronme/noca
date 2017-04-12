@@ -7,4 +7,5 @@ class User(Document):
     name = StringField()
     date_modified = DateTimeField(default=datetime.datetime.now)
     address = DictField()
+    state_dict = DictField()
     attempt_counter = IntField()
