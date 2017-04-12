@@ -40,7 +40,7 @@ class WebhookView(MethodView):
 			if 'text' in data['entry'][0]['messaging'][0]['message'].keys():
 				message = data['entry'][0]['messaging'][0]['message']['text']
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
-			message = in data['entry'][0]['messaging'][0]['postback']['payload']
+			message = data['entry'][0]['messaging'][0]['postback']['payload']
 		else:
 			reply(sender, 'oops, something went wrong')
 			return 'ok'
