@@ -52,9 +52,7 @@ class WebhookView(MethodView):
 
 
 		print('user id is: ', user.fb_id)
-		self.reply(sender, 
-		response)
-
+		
 		try:
 			self.reply(sender, 'Your message backwards is {}'.format(message[::-1]))
 		except UnicodeEncodeError:
