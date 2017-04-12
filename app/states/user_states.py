@@ -1,4 +1,5 @@
 import requests
+from mongoengine import *
 from app.states.replies import ACCESS_TOKEN, reply
 from app.models.merchant import Merchant
 
@@ -68,51 +69,51 @@ class GetPaymentState():
 			return 'ok'
 		sender = data['entry'][0]['messaging'][0]['sender']['id']
 
-		if not user.attempt_counter:
+		if not self.user.attempt_counter:
 			merchant = Merchant.objects(merchant_id=message).first()
 			if merchant:
 				reply(sender, 'You are trying to make a payment at {}.\nIf not, please respond with the message: "N", otherwise please tell us how much would like to pay'.format(self.merchant.name))
-				user.attempt_counter = 1
-				user.save()
+				self.user.attempt_counter = 1
+				self.user.save()
 				return ''
-		elif user.attempt_counter == 1:
+		elif self.user.attempt_counter == 1:
 			if message.lower() == 'n':
 				reply(sender, 'Please try sendin the merchant number again.')
-				user.attempt_counter = 2
-				user.save()
+				self.user.attempt_counter = 2
+				self.user.save()
 				return ''
 			else:
 				try:
 					amount = float(message)
 				except ValueError:
 					reply(sender, 'I didn\'t understand your message. I was expecting to recieve an amount. One of our agents will help you shortly.')
-					user.attempt_counter = 0
-					user.save()
+					self.user.attempt_counter = 0
+					self.user.save()
 					return ''
 				reply(sender, 'To pay {amount} at {merchant} send "y" or send the amount again'.format(amount=amount, merchant=self.merchant.name))
-				user.attempt_counter == 3
-				user.save()
+				self.user.attempt_counter == 3
+				self.user.save()
 				return ''
-		elif user.attempt_counter == 2:
+		elif self.user.attempt_counter == 2:
 			merchant = Merchant.objects(merchant_id=message).first()
 			if merchant:
 				reply(sender, 'You are trying to make a payment at {}.\n If so please send us the amount, otherwise one of our agents will help you shortly'.format(merchant=self.merchant.name))
-				user.attempt_counter = 3
-				user.save()
+				self.user.attempt_counter = 3
+				self.user.save()
 				return ''
-		elif user.attempt_counter == 3:
+		elif self.user.attempt_counter == 3:
 			if message.lower() == 'y':
 				reply(sender, 'Thank you for using Nocapay. See you soon.')
-				user.attempt_counter = 0
-				user.save()
+				self.user.attempt_counter = 0
+				self.user.save()
 				return ''
 			else:
 				try:
 					amount = float(message)
 				except ValueError:
 					reply(sender, 'I didn\'t understand your message. I was expecting to recieve an amount. One of our agents will help you shortly.')
-					user.attempt_counter = 0
-					user.save()
+					self.user.attempt_counter = 0
+					self.user.save()
 					return ''
 				reply(sender, 'To pay {amount} at {merchant} send "y", otherwise one of our agents will help you shortly'.format(amount=amount, merchant=self.merchant.name))
 				return ''
