@@ -117,7 +117,7 @@ class GetPaymentState():
 		if not self.user.attempt_counter:
 			merchant = Merchant.objects(merchant_id=message).first()
 			if merchant:
-				reply(self.user.fb_id, 'You are trying to make a payment at {}.\nIf not, please respond with the message: "N", otherwise please tell us how much would like to pay'.format(merchant.name))
+				reply(self.user.fb_id, 'You are trying to make a payment at {}.'.format(merchant.name))
 				self.user.attempt_counter = 1
 				self.user.save()
 				return ''

@@ -34,7 +34,7 @@ class WebhookView(MethodView):
 		print('user state is: ', user.state)
 		state = states_dict[user.state](user)
 
-		print('the message is: ', data['entry'][0]['messaging'][0]['message'])
+		print('the message is: ', data['entry'][0]['messaging'][0])
 		
 		if 'message' in data['entry'][0]['messaging'][0].keys():
 			if 'text' in data['entry'][0]['messaging'][0]['message'].keys():
