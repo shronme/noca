@@ -36,12 +36,12 @@ class GetPaymentState():
 			fb_button = [
 				{
 					"type": "postback",
-					"title": "No, that's not the place",
+					"title": "No, it's not",
 					"payload": "no"
 				},
 				{
 					"type": "postback",
-					"title": "Yes, that's the place",
+					"title": "Yes, it is",
 					"payload": "yes"
 				}
 			]
