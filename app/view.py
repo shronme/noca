@@ -56,15 +56,8 @@ class WebhookView(MethodView):
 		
 			response = state.run(data)
 
-
 		print('user id is: ', user.fb_id)
 		
-		try:
-			self.reply(sender, 'Your message backwards is {}'.format(message[::-1]))
-		except UnicodeEncodeError:
-			self.reply(sender, 'oops, something went wrong')
-			return 'ok'
-
 		return 'ok'
 
 	def get(self):
