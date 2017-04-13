@@ -116,7 +116,7 @@ class GetPaymentState():
 		self.user.save()
 		return ''
 	
-	def confirm_amount:
+	def confirm_amount(self, mesage):
 		if 'attempts' not in self.user.state_dict.keys():
 			self.user.state_dict['attempts'] = 0
 		if message == 'yes':
