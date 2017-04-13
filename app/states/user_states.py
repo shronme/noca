@@ -125,6 +125,7 @@ class GetPaymentState():
 				amount = self.user.state_dict['amount'], merchant=self.user.state_dict['merchant'])
 			)
 			self.user.state = 'get_payment'
+			self.user.state_dict = {}
 		if message == 'no':
 			self.user.state_dict['merchant'] = ''
 			if self.user.state_dict['attempts'] >= 2:
