@@ -49,6 +49,7 @@ class GetPaymentState():
 				fb_button,
 				'You are trying to make a payment at {}.'.format(merchant.name))
 			self.user.state_dict['step'] = 'confirm_merchant'
+			self.user.state_dict['merchant'] = merchant.name
 			self.user.state_dict['attempts'] = 0
 			self.user.save()
 		else:
@@ -65,10 +66,13 @@ class GetPaymentState():
 		return ''
 	
 	def confirm_merchant(self, message):
+		if 'attempts' not in self.user.state_dict.keys():
+			self.user.state_dict['attempts'] = 0
 		if message == 'yes':
 			reply(self.user.fb_id, 'How much would you like to pay?')
 			self.user.state_dict['step'] = 'amount_requested'
 		if message == 'no':
+			self.user.state_dict['merchant'] = ''
 			if self.user.state_dict['attempts'] >= 2:
 				reply(self.user.fb_id, 'It seems that something went wrong. One of our agent will help you shortly')
 			else:
@@ -79,14 +83,67 @@ class GetPaymentState():
 		return ''
 
 	def amount_requested(self, message):
+		amount = message.replace('£', '')
+		merchant = self.user.state_dict['merchant']
+		if 'attempts' not in self.user.state_dict.keys():
+			self.user.state_dict['attempts'] = 0
+		if self.user.state_dict['attempts'] >= 2:
+			reply(self.user.fb_id, 'It seems that something went wrong. One of our agent will help you shortly')
+		else:	
+			try:
+				amount = float(amount)
+				fb_button = [
+					{
+						"type": "postback",
+						"title": "No, wrong amount",
+						"payload": "no"
+					},
+					{
+						"type": "postback",
+						"title": "Yes, that\'s the amount",
+						"payload": "yes"
+					}
+				]
+				reply_with_buttons(self.user.fb_id,
+				fb_button,
+				'To approve a payment of {amount} at {merchant} click "Yes", otherwise "No".'.format(amount=amount, merchant=merchant))
+				self.user.state_dict['step'] = 'confirm_amount'
+				self.user.state_dict['attempts'] = 0
+				self.user.state_dict['amount'] = amount
+			except ValueError:
+				reply(self.user.fb_id, 'Sorry, I didn\'t understand the amount. Please send the amount again as a number or \'£\' followed by the amount')
+				self.user.state_dict['attempts'] = self.user.state_dict['attempts'] + 1
+		self.user.save()
 		return ''
 	
+	def confirm_amount:
+		if 'attempts' not in self.user.state_dict.keys():
+			self.user.state_dict['attempts'] = 0
+		if message == 'yes':
+			reply(
+				self.user.fb_id, 'The payment of {amount} at {merchant} is now approved. \nThanks for Paying with Nocapay.'.format(
+				amount = self.user.state_dict['amount'], merchant=self.user.state_dict['merchant'])
+			)
+			self.user.state = 'get_payment'
+		if message == 'no':
+			self.user.state_dict['merchant'] = ''
+			if self.user.state_dict['attempts'] >= 2:
+				reply(self.user.fb_id, 'It seems that something went wrong. One of our agent will help you shortly')
+			else:
+				reply(self.user.fb_id, 'Please send the amount again as a number or \'£\' followed by the amount')
+				self.user.state_dict['step'] = 'confirm_amount'
+				self.user.state_dict['attempts'] = self.user.state_dict['attempts'] + 1
+		self.user.save()
+		return ''
+
+
 	def __init__(self, user):
 		self.user = user
 		self.run_dict = {
 		'start_payment': self.start_payment,
 		'confirm_merchant': self.confirm_merchant,
-		'amount_requested': self.amount_requested
+		'amount_requested': self.amount_requested,
+		'confirm_amount': self.confirm_amount
 		}
 
 
