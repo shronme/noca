@@ -47,8 +47,7 @@ class GetPaymentState():
 			]
 			reply_with_buttons(self.user.fb_id,
 				fb_button,
-				'You are trying to make a payment at {}.\nIf not, \
-				please respond with the message: "N", otherwise please tell us how much would like to pay'.format(merchant.name))
+				'You are trying to make a payment at {}.'.format(merchant.name))
 			self.user.state_dict['step'] = 'confirm_merchant'
 			self.user.state_dict['attempts'] = 0
 			self.user.save()

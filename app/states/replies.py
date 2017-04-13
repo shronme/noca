@@ -20,7 +20,18 @@ def reply_with_buttons(user_id, button_list, text):
 				"payload": {
 					"template_type": "button",
 					"text": text,
-					"buttons": button_list
+					"buttons": [
+									{
+										"type":"web_url",
+										"url":"https://petersapparel.parseapp.com",
+										"title":"Show Website"
+									},
+									{
+										"type":"postback",
+										"title":"Start Chatting",
+										"payload":"USER_DEFINED_PAYLOAD"
+									}
+								]
 				}
 			}
 		}
