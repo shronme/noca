@@ -53,6 +53,8 @@ class GetPaymentState():
 			self.user.state_dict['attempts'] = 0
 			self.user.save()
 		else:
+			if 'attempts' not in self.user.state_dict.keys():
+				self.user.state_dict['attempts'] = 0
 			if self.user.state_dict['attempts'] >= 2:
 				reply(self.user.fb_id, 'It seems that something went wrong. One of our agent will help you shortly')
 			else:
