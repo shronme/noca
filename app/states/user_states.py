@@ -106,6 +106,8 @@ class GetPaymentState():
 		self.user.state_dict['state'] = 'get_payment'
 		if self.user.state_dict['state'] != self.user.state:
 			self.user.state_dict['step'] = 'start_payment'
+		if 'step' not in self.user.state_dict.keys():
+			self.user.state_dict['step'] = 'start_payment'
 		self.user.save()	
 
 		return self.run_dict[self.user.state_dict['step']](message)
