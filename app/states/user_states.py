@@ -53,10 +53,12 @@ class GetPaymentState():
 			self.user.save()
 		else:
 			if 'attempts' not in self.user.state_dict.keys():
+				print('adding attempts')
 				self.user.state_dict['attempts'] = 0
 			if self.user.state_dict['attempts'] >= 2:
 				reply(self.user.fb_id, 'It seems that something went wrong. One of our agent will help you shortly')
 			else:
+				print('making attempt')
 				reply(self.user.fb_id, 'Sorry we could not identify this merchant. Pleae try entring the merchant ID one more time.')
 				self.user.state_dict['attempts'] = self.user.state_dict['attempts'] + 1
 		return ''
