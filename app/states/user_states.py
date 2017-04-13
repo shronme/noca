@@ -61,6 +61,7 @@ class GetPaymentState():
 				print('making attempt')
 				reply(self.user.fb_id, 'Sorry we could not identify this merchant. Pleae try entring the merchant ID one more time.')
 				self.user.state_dict['attempts'] = self.user.state_dict['attempts'] + 1
+		user.save()
 		return ''
 	
 	def confirm_merchant(self, message):
