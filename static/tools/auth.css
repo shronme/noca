@@ -117,6 +117,7 @@ h3{
 
 .app .controls #take-photo i{
     font-size: 112px;
+    color: black;
 }
 
 .app canvas{
