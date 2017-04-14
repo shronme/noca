@@ -99,7 +99,7 @@ function init(el) {
     return;
   }
   el.onclick = capture;
-  el.textContent = 'Snapshot';
+  // el.textContent = 'Snapshot';
   navigator.getUserMedia({video: true}, gotStream, noStream);
 }
 

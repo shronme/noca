@@ -114,11 +114,17 @@ article {
   position: relative;
   background: black;
   margin: auto;
-  width: 90%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 
 }
-
+.auth-head {
+  color: white;
+  position: absolute;
+  left: 45.5%;
+  top: 5%;
+  font-size: 16pt;
+}
 h1 {
   font-weight: 300;
 }
