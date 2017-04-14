@@ -44,7 +44,8 @@ article {
   /*-webkit-transform: scaleX(-1);*/
   width: 100%;  /*-webkit-box-reflect: below 20px -webkit-linear-gradient(top, transparent, transparent 80%, rgba(255,255,255,0.2));*/
   height: 100%;
-  position: relative;
+  position: absolute;
+  top: 0px;
 }
 #snapshot {
   /*-webkit-transform: scaleX(-1);*/
@@ -95,9 +96,8 @@ article {
   height: 100%;
 
 }
-.auth-head {
-  color: white;
-  
+#auth-head {
+  color: white; 
   font-size: 32pt;
   z-index: 1;
 }
