@@ -46,6 +46,7 @@ article {
   height: 100%;
   position: absolute;
   top: 0px;
+  left: 0px;
 }
 #snapshot {
   /*-webkit-transform: scaleX(-1);*/
