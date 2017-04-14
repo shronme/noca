@@ -79,7 +79,7 @@ article {
   z-index: 1;
   position: absolute;
   left: 45%;
-  top: 80%;
+  top: 70%;
   background-color: Transparent;
   /*border: none;*/
   color: white;
@@ -91,8 +91,8 @@ article {
   margin: 4px 2px;*/
   cursor: pointer;
   /*display:block;*/
-  height: 75px;
-  width: 30px;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
   border: 5px solid white;
 }
@@ -123,7 +123,7 @@ article {
   position: absolute;
   left: 45.5%;
   top: 5%;
-  font-size: 16pt;
+  font-size: 32pt;
 }
 h1 {
   font-weight: 300;
