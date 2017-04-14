@@ -95,6 +95,10 @@ article {
   height: 100%;
 
 }
+.auth-header {
+  color: white;
+  font-size: 32pt;
+}
 h1 {
   font-weight: 300;
 }
