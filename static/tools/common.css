@@ -97,6 +97,27 @@ article {
   height: 100%;
 
 }
+.button{
+  z-index: 1;
+  position: absolute;
+  left: 45%;
+  top: 85%;
+  background-color: Transparent;
+  /*border: none;*/
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+/*  display: block;
+*//*  font-size: 16px;
+  margin: 4px 2px;*/
+  cursor: pointer;
+  /*display:block;*/
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 5px solid white;
+}
 #auth-head {
   color: white; 
   font-size: 32pt;
