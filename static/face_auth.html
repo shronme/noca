@@ -22,22 +22,20 @@ Author: Eric Bidelman (ericbidelman@chromium.org)
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
 <link href="tools/common.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Photobooth</title>
 
 </head>
 <body>
 
 <article>
+	<h1>Face ID</h1>
 	<section id="app" >
 		<div class="container">
-			<span class="auth-head">Face ID</span>
 			<span id="live">LIVE</span>
 			<video id="monitor" autoplay onclick="changeFilter(this)" title="Click me to see different filters"></video>
-			<span ><button class="button" onclick="init(this)"></span>
 
 		</div>
-		
+		<p><button onclick="init(this)">Capture</button></p>
 		
 	</section>
 	<img id="snapshot">

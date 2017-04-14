@@ -45,7 +45,6 @@ article {
   width: 100%;  /*-webkit-box-reflect: below 20px -webkit-linear-gradient(top, transparent, transparent 80%, rgba(255,255,255,0.2));*/
   height: 100%;
   position: relative;
-  z-index: -1;
 }
 #snapshot {
   /*-webkit-transform: scaleX(-1);*/
@@ -75,27 +74,6 @@ article {
   left: -20px;
   margin-top: 5px;
 }
-.button {
-  z-index: 1;
-  position: absolute;
-  left: 45%;
-  top: 85%;
-  background-color: Transparent;
-  /*border: none;*/
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-/*  display: block;
-*//*  font-size: 16px;
-  margin: 4px 2px;*/
-  cursor: pointer;
-  /*display:block;*/
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  border: 5px solid white;
-}
 #gallery img {
   position: absolute;
   z-index: -1;
@@ -109,21 +87,13 @@ article {
 #app {
   height: 100%;
 }
-
 .container {
   position: relative;
   background: black;
   margin: auto;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 80%;
 
-}
-.auth-head {
-  color: white;
-  position: absolute;
-  left: 45.5%;
-  top: 5%;
-  font-size: 32pt;
 }
 h1 {
   font-weight: 300;

@@ -64,7 +64,7 @@ function noStream(e) {
   if (e.code == 1) {
     msg = 'User denied access to use camera.';
   }
-  document.getElementById('errorMessage').textContent = msg;
+  //document.getElementById('errorMessage').textContent = msg;
 }
 
 function capture() {
@@ -99,7 +99,7 @@ function init(el) {
     return;
   }
   el.onclick = capture;
-  // el.textContent = 'Snapshot';
+  el.textContent = 'Snapshot';
   navigator.getUserMedia({video: true}, gotStream, noStream);
 }
 
