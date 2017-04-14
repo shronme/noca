@@ -20,9 +20,6 @@ h3{
     text-align: center;
 }
 
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
-
 .container{
     max-width: 1000px;
     margin: 50px auto;
@@ -119,7 +116,7 @@ h3{
 }
 
 .app .controls #take-photo i{
-    font-size: 32px;
+    font-size: 112px;
 }
 
 .app canvas{
