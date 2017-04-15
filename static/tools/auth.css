@@ -166,6 +166,10 @@ h3{
         margin: 10px;
     }
 
+    .app #start-camera.visible{
+        display: block;
+    }
+
     .app #error-message{
         padding: 80px 50px;
         font-size: 18px;
