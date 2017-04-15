@@ -86,7 +86,6 @@ h3{
     justify-content: space-between;
     padding: 30px;
     display: none;
-    margin: auto;
 }
 
 .app .controls a{
@@ -103,6 +102,7 @@ h3{
 
 .app .controls a:hover{
     opacity: 1;
+    font-size: 112px;
 }
 
 .app .controls a.disabled{
@@ -110,10 +110,12 @@ h3{
     opacity: 0.5;
     cursor: default;
     pointer-events: none;
+    font-size: 112px;
 }
 
 .app .controls a.disabled:hover{
     opacity: 0.5;
+    font-size: 112px;
 }
 
 .app .controls a i{
@@ -148,13 +150,16 @@ h3{
         margin: 40px;
     }
 
+    .app #start-camera.visible{
+        display: block;
+    }
+
     .app .controls a i{
         font-size: 16px;
     }
 
     .app .controls #take-photo i{
         font-size: 24px;
-        margin: auto;
     }
 }
 
@@ -175,8 +180,6 @@ h3{
 
     .app .controls #take-photo i{
         font-size: 36px;
-        margin: auto;
-
     }
 }
 
