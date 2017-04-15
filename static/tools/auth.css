@@ -40,8 +40,8 @@ h3{
     display: none;
     border-radius: 3px;
     max-width: 400px;
-    color: #fff;
-    background-color: #448AFF;
+    color: red;
+    background-color: red;
     text-decoration: none;
     padding: 15px;
     opacity: 0.8;
@@ -99,11 +99,13 @@ h3{
     outline: none;
     -webkit-tap-highlight-color: transparent;
     font-size: 112px;
+    color: blue;
 }
 
 .app .controls a:hover{
     opacity: 1;
     font-size: 112px;
+
 }
 
 .app .controls a.disabled{
@@ -112,11 +114,13 @@ h3{
     cursor: default;
     pointer-events: none;
     font-size: 112px;
+    color: red;
 }
 
 .app .controls a.disabled:hover{
     opacity: 0.5;
     font-size: 112px;
+    color: blue;
 }
 
 .app .controls a i{
