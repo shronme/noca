@@ -116,13 +116,13 @@ h3{
 }
 
 .app .controls a i{
-    font-size: 18px;
-}
-
-.app .controls #take-photo i{
     font-size: 112px;
 }
 
+/*.app .controls #take-photo i{
+    font-size: 112px;
+}
+*/
 .app canvas{
     display: none;
 }
