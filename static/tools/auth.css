@@ -40,8 +40,8 @@ h3{
     display: none;
     border-radius: 3px;
     max-width: 400px;
-    color: red;
-    background-color: red;
+    color: #fff;
+    background-color: #448AFF;
     text-decoration: none;
     padding: 15px;
     opacity: 0.8;
@@ -98,14 +98,10 @@ h3{
     opacity: 0.7;
     outline: none;
     -webkit-tap-highlight-color: transparent;
-    font-size: 112px;
-    color: blue;
 }
 
 .app .controls a:hover{
     opacity: 1;
-    font-size: 112px;
-
 }
 
 .app .controls a.disabled{
@@ -113,14 +109,10 @@ h3{
     opacity: 0.5;
     cursor: default;
     pointer-events: none;
-    font-size: 112px;
-    color: red;
 }
 
 .app .controls a.disabled:hover{
     opacity: 0.5;
-    font-size: 112px;
-    color: blue;
 }
 
 .app .controls a i{
@@ -184,7 +176,7 @@ h3{
     }
 
     .app .controls #take-photo i{
-        font-size: 18px;
+        font-size: 36px;
     }
 }
 
