@@ -102,6 +102,7 @@ h3{
 
 .app .controls a:hover{
     opacity: 1;
+    font-size: 112px;
 }
 
 .app .controls a.disabled{
