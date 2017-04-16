@@ -167,11 +167,11 @@ h3{
         display: block;
     }*/
 
-    .app .controls a i{
+    .app .controls .cam_btn a i{
         font-size: 16px;
     }
 
-    .app .controls #take-photo i{
+    .app .controls .cam_btn i{
         font-size: 24px;
     }
 }
@@ -187,11 +187,11 @@ h3{
         font-size: 18px;
     }
 
-    .app .controls a i{
+    .app .controls .cam_btn a i{
         font-size: 12px;
     }
 
-    .app .controls #take-photo i{
+    .app .controls .cam_btn i{
         font-size: 36px;
     }
 }
