@@ -85,6 +85,7 @@ h3{
     align-items: flex-end;
     justify-content: space-between;
     padding: 30px;
+    display: none;
 }
 
 .app .controls a{
@@ -167,10 +168,6 @@ h3{
 @media(max-width: 600px){
     .container{
         margin: 10px;
-    }
-
-    .app #start-camera{
-        display: block;
     }
 
     .app #error-message{
