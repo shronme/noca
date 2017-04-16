@@ -74,4 +74,7 @@ class WebhookView(MethodView):
 	def handle_verification(self):
 	    return request.args['hub.challenge']
 
-    
+ class AuthenticateView(MethodView):
+
+ 	def post(self):
+ 	return 'ok'   

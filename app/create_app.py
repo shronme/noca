@@ -27,6 +27,7 @@ def create_app():
         instructions + footer_text))
     
     app.add_url_rule('/webhook', view_func=WebhookView.as_view('webhook_view'))
+    app.add_url_rule('/authenticate', view_func=AuthenticateView.as_view('authenticate_view'))
     
 
     return app
