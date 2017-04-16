@@ -171,9 +171,9 @@ h3{
     }
 
     .app #start-camera.visible{
-        display: block;
+        display: none;
     }
-    
+
     .app #error-message{
         padding: 80px 50px;
         font-size: 18px;
