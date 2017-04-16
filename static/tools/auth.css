@@ -151,10 +151,6 @@ h3{
         margin: 40px;
     }
 
-    .app #start-camera.visible{
-        display: block;
-    }
-
     .app .controls a i{
         font-size: 16px;
     }
