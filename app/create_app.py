@@ -1,6 +1,6 @@
 from flask import Flask
 from mongoengine import *
-from app.view import WebhookView
+from app.view import WebhookView, AuthenticateView
 from app.models.merchant import Merchant
 
 
