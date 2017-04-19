@@ -67,18 +67,7 @@ start_camera.addEventListener("click", function(e){
 take_photo_btn.addEventListener("click", function(e){
   var http = new XMLHttpRequest();
   var url = "https://nocapay.com/app/authenticate";
-  var params = "lorem=ipsum&name=binny";
-  http.open("POST", url, true);
-
-  //Send the proper header information along with the request
-  http.setRequestHeader("Content-type", "application/json");
-
-  http.onreadystatechange = function() {//Call a function when the state changes.
-      if(http.readyState == 4 && http.status == 200) {
-          alert(http.responseText);
-      }
-  }
-  http.send(params);
+  
   
   e.preventDefault();
 
@@ -97,6 +86,20 @@ take_photo_btn.addEventListener("click", function(e){
 
   // Pause video playback of stream.
   video.pause();
+
+  data = JSON.stringify({'image': snap});
+  
+  http.open("POST", url, true);
+
+  //Send the proper header information along with the request
+  http.setRequestHeader("Content-type", "application/json");
+
+  http.onreadystatechange = function() {//Call a function when the state changes.
+      if(http.readyState == 4 && http.status == 200) {
+          alert(http.responseText);
+      }
+  }
+  http.send(data);
 
 });
 

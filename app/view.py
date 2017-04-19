@@ -1,4 +1,9 @@
+import random
+import string
 import requests
+import boto3
+import base64
+
 from mongoengine import *
 from flask.views import MethodView
 from flask import request
@@ -74,7 +79,16 @@ class WebhookView(MethodView):
 	def handle_verification(self):
 	    return request.args['hub.challenge']
 
+
 class AuthenticateView(MethodView):
 
 	def post(self):
-		return 'ok'   
+		data = request.json
+		print('data is: ', data)
+		img_data = data['image'].split(',')[1]
+		img_bytes = img_data.encode()
+		image_file = base64.decodebytes(img_bytes)
+		image_name = '123/test_' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6)) + '.jpeg'
+		s3 = boto3.resource('s3')
+		s3.Bucket('paytest').put_object(Key=image_name, Body=image_file)
+		return 'ok'
