@@ -30,9 +30,9 @@ def create_app():
     app.add_url_rule('/webhook', view_func=WebhookView.as_view('webhook_view'))
     app.add_url_rule('/authenticate', view_func=AuthenticateView.as_view('authenticate_view'))
 
-    setup_get_started(
-        'Hi and welcome to Noca Pay.\nAs a new customer your first purchase, up to £10 is on us. After that we will ask you to register in order to make further purchases.')
+    setup_geting_started()
     setup_persistant_menu()
+    setup_greeting('Nocapay Bot is here to help you make quick payments')
     
     return app
 
