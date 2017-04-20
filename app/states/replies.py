@@ -59,8 +59,8 @@ def setup_persistant_menu():
 					
 		    	},
 				{
-					"type":"postback",
 					"title":"Get Help",
+					"type":"postback",
 					"payload":"GET_HELP"
 				}
 			]	

@@ -47,6 +47,7 @@ class WebhookView(MethodView):
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
 			message = data['entry'][0]['messaging'][0]['postback']['payload']
 			if message == 'GET_HELP':
+				print('in get help')
 				reply(sender, 'Please tell us how can we help and one of our agents will respond promptly')
 				#TODO Stop bot for this thread until issue resolved
 		else:
