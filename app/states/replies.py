@@ -41,6 +41,56 @@ def setup_get_started(text):
 
 	resp = requests.post(url, json=data)
 	print('Get started result is: ', resp.json)
+
+
+def setup_persistant_menu():
+	url = 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=' + ACCESS_TOKEN
+
+	data = {
+		"persistent_menu":[
+		{
+			"locale":"default",
+			"composer_input_disabled":true,
+			"call_to_actions":[
+				{
+					"title":"My Account",		
+					"type":"nested",
+					"call_to_actions":[
+					{
+						"title":"Pay Bill",
+						"type":"postback",
+						"payload":"PAYBILL_PAYLOAD"
+					},
+					{
+						"title":"History",
+						"type":"postback",
+						"payload":"HISTORY_PAYLOAD"
+					},
+					{
+						"title":"Contact Info",
+						"type":"postback",
+						"payload":"CONTACT_INFO_PAYLOAD"
+					}
+					]
+		    	},
+				{
+					"type":"web_url",
+					"title":"Latest News",
+					"url":"http://petershats.parseapp.com/hat-news",
+					"webview_height_ratio":"full"
+				}
+			]	
+		},
+		{
+			"locale":"zh_CN",
+			"composer_input_disabled":false
+		}
+		]
+	}
+	resp = requests.post(url, json=data)
+	print('Set menu result is: ', resp.json)
+
+
 	# data = {
 # 	        "recipient": {"id": user_id},
 # 	        'message': {
