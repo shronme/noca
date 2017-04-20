@@ -50,34 +50,18 @@ def setup_persistant_menu():
 		"persistent_menu":[
 		{
 			"locale":"default",
-			"composer_input_disabled": True,
+			"composer_input_disabled": False,
 			"call_to_actions":[
 				{
-					"title":"My Account",		
-					"type":"nested",
-					"call_to_actions":[
-					{
-						"title":"Pay Bill",
-						"type":"postback",
-						"payload":"PAYBILL_PAYLOAD"
-					},
-					{
-						"title":"History",
-						"type":"postback",
-						"payload":"HISTORY_PAYLOAD"
-					},
-					{
-						"title":"Contact Info",
-						"type":"postback",
-						"payload":"CONTACT_INFO_PAYLOAD"
-					}
-					]
+					"title":"Make Payment",		
+					"type":"postback",
+					"payload":"PAYBILL_PAYLOAD"
+					
 		    	},
 				{
-					"type":"web_url",
-					"title":"Latest News",
-					"url":"http://petershats.parseapp.com/hat-news",
-					"webview_height_ratio":"full"
+					"type":"postback",
+					"title":"Get Help",
+					"payload":"GET_HELP"
 				}
 			]	
 		},
