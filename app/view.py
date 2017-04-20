@@ -49,7 +49,7 @@ class WebhookView(MethodView):
 			if message == 'GET_HELP':
 				print('in get help')
 				reply(sender, 'Please tell us how can we help and one of our agents will respond promptly')
-			elif message == 'GET_STARTED'
+			elif message == 'GET_STARTED':
 				reply(sender, 
 					'Hi and welcome to Noca Pay.\nAs a new customer your first purchase, up to £10 is on us. After that we will ask you to register in order to make further purchases.')
 				#TODO Stop bot for this thread until issue resolved
