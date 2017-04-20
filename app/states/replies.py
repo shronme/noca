@@ -50,7 +50,7 @@ def setup_persistant_menu():
 		"persistent_menu":[
 		{
 			"locale":"default",
-			"composer_input_disabled":true,
+			"composer_input_disabled": True,
 			"call_to_actions":[
 				{
 					"title":"My Account",		
@@ -81,10 +81,7 @@ def setup_persistant_menu():
 				}
 			]	
 		},
-		{
-			"locale":"zh_CN",
-			"composer_input_disabled":false
-		}
+		
 		]
 	}
 	resp = requests.post(url, json=data)
