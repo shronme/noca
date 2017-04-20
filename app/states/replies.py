@@ -30,7 +30,17 @@ def reply_with_buttons(user_id, button_list, text):
 	resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
 	print(resp.content)
 
+def setup_get_started(text):
+	url = 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=' + ACCESS_TOKEN
 
+	data = {
+		'get_started': {
+			'payload': text
+		}
+	}
+
+	resp = requests.post(url, json=data)
+	print('Get started result is: ', resp.json)
 	# data = {
 # 	        "recipient": {"id": user_id},
 # 	        'message': {

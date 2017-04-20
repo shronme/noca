@@ -2,6 +2,7 @@ from flask import Flask
 from mongoengine import *
 from app.view import WebhookView, AuthenticateView
 from app.models.merchant import Merchant
+from app.states.replies import setup_get_started
 
 
 def create_mock_merchant():
@@ -28,6 +29,8 @@ def create_app():
     
     app.add_url_rule('/webhook', view_func=WebhookView.as_view('webhook_view'))
     app.add_url_rule('/authenticate', view_func=AuthenticateView.as_view('authenticate_view'))
+
+    setup_get_started('Hi and welcome to Noca Pay')
     
 
     return app
