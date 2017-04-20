@@ -28,7 +28,9 @@ class GetPaymentState():
 
 	def start_payment(self, message):
 		print('starting payment')
-		
+		if message == 'START_PAYMENT':
+			reply(self.user.fb_id, 'Please text us the merchant ID number')
+			return ''
 		merchant = Merchant.objects(merchant_id=message).first()
 		if merchant:
 			print('in merchant2')

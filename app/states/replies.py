@@ -55,7 +55,7 @@ def setup_persistant_menu():
 				{
 					"title":"Make Payment",		
 					"type":"postback",
-					"payload":"PAYBILL_PAYLOAD"
+					"payload":"START_PAYMENT"
 					
 		    	},
 				{
