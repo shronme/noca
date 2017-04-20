@@ -2,7 +2,7 @@ from flask import Flask
 from mongoengine import *
 from app.view import WebhookView, AuthenticateView
 from app.models.merchant import Merchant
-from app.states.replies import setup_get_started, setup_persistant_menu
+from app.states.replies import setup_geting_started, setup_persistant_menu, setup_greeting
 
 
 def create_mock_merchant():
