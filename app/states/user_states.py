@@ -161,12 +161,12 @@ class GetPaymentState():
 				message = data['entry'][0]['messaging'][0]['message']['text']
 			else:
 				reply(self.user.fb_id, 'oops, something went wrong')
-				return 'ok'
+				return ''
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
 			message = data['entry'][0]['messaging'][0]['postback']['payload']
 		else:
 			reply(self.user.fb_id, 'oops, something went wrong')
-			return 'ok'
+			return ''
 		self.user.state_dict['state'] = 'get_payment'
 		if self.user.state_dict['state'] != self.user.state:
 			self.user.state_dict['step'] = 'start_payment'
