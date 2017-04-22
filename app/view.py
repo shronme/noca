@@ -53,7 +53,7 @@ class WebhookView(MethodView):
 					rnd_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
 					image_name = '{user}/transaction_{rnd}.jpeg'.format(user=user.name, rnd=rnd_str)
 					s3 = boto3.resource('s3')
-					s3.Bucket('paytest').put_object(Key=image_name, Body=image_file)
+					s3.Bucket('paytest').put_object(Key=image_name, Body=image)
 					return 'ok'
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
 			message = data['entry'][0]['messaging'][0]['postback']['payload']
