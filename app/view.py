@@ -4,6 +4,8 @@ import requests
 import boto3
 import base64
 
+from PIL import Image
+from io import BytesIO
 from mongoengine import *
 from flask.views import MethodView
 from flask import request
@@ -44,6 +46,15 @@ class WebhookView(MethodView):
 		if 'message' in data['entry'][0]['messaging'][0].keys():
 			if 'text' in data['entry'][0]['messaging'][0]['message'].keys():
 				message = data['entry'][0]['messaging'][0]['message']['text']
+			elif 'attachments' in data['entry'][0]['messaging'][0]['message'].keys():
+				if data['entry'][0]['messaging'][0]['message']['attachments']['type'] == 'image':
+					img_req = requests.get(data['entry'][0]['messaging'][0]['message']['attachments']['payload']['url'])
+					image = Image.open(BytesIO(img_req.content))
+					rnd_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
+					image_name = '{user}/transaction_{rnd}.jpeg'.format(user=user.name, rnd=rnd_str)
+					s3 = boto3.resource('s3')
+					s3.Bucket('paytest').put_object(Key=image_name, Body=image_file)
+					return 'ok'
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
 			message = data['entry'][0]['messaging'][0]['postback']['payload']
 			if message == 'GET_HELP':
