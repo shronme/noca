@@ -49,7 +49,7 @@ class WebhookView(MethodView):
 			elif 'attachments' in data['entry'][0]['messaging'][0]['message'].keys():
 				if data['entry'][0]['messaging'][0]['message']['attachments'][0]['type'] == 'image':
 					img_req = requests.get(data['entry'][0]['messaging'][0]['message']['attachments'][0]['payload']['url'])
-					image = Image.open(BytesIO(img_req.content))
+					image = img_req.content
 					rnd_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
 					image_name = '{user}/transaction_{rnd}.jpeg'.format(user=user.name, rnd=rnd_str)
 					s3 = boto3.resource('s3')
