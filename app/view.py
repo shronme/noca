@@ -56,6 +56,9 @@ class WebhookView(MethodView):
 					rek = boto3.client('rekognition', region_name='eu-west-1')
 					s3.Bucket('paytest').put_object(Key=image_name, Body=image)
 					source_image_name = '{name}/source/{name}-source.jpg'.format(name=user.name)
+					print('source name: ', source_image_name)
+					print('target name: ', image_name)
+					
 					response = rek.compare_faces(
 						SourceImage={
 							'S3Object': {
@@ -70,9 +73,7 @@ class WebhookView(MethodView):
 							}
 						}
 					)
-					print('source name: ', source_image_name)
-					print('target name: ', image_name)
-					
+
 					similarity = response['FaceMatches']['Similarity']
 
 					if similarity > 95:
