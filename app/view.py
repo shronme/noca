@@ -73,7 +73,7 @@ class WebhookView(MethodView):
 							}
 						}
 					)
-
+					print('rek response: ', response)
 					similarity = response['FaceMatches'][0]['Similarity']
 
 					if similarity > 95:
