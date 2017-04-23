@@ -55,32 +55,32 @@ class WebhookView(MethodView):
 					s3 = boto3.resource('s3')
 					rek = boto3.client('rekognition', region_name='eu-west-1')
 					s3.Bucket('noca-auth-library').put_object(Key=image_name, Body=image)
-					# target_obj = s3.Object('noca-auth-library',image_name).wait_until_exists()
-					# source_image_name = '{name}/source/{name}-source.jpeg'.format(name=user.name)
-					# print('source name: ', source_image_name)
-					# print('target name: ', image_name)
+					target_obj = s3.Object('noca-auth-library',image_name).wait_until_exists()
+					source_image_name = '{name}/source/{name}-source.jpeg'.format(name=user.name)
+					print('source name: ', source_image_name)
+					print('target name: ', image_name)
 					
-					# response = rek.compare_faces(
-					# 	SourceImage={
-					# 		'S3Object': {
-					# 			'Bucket': 'noca-auth-library',
-					# 			'Name': source_image_name
-					# 		}
-					# 	}, 
-					# 	TargetImage={
-					# 		'S3Object': {
-					# 			'Bucket': 'noca-auth-library', 
-					# 			'Name': image_name
-					# 		}
-					# 	}
-					# )
-					# print('rek response: ', response)
-					# similarity = response['FaceMatches'][0]['Similarity']
+					response = rek.compare_faces(
+						SourceImage={
+							'S3Object': {
+								'Bucket': 'noca-auth-library',
+								'Name': source_image_name
+							}
+						}, 
+						TargetImage={
+							'S3Object': {
+								'Bucket': 'noca-auth-library', 
+								'Name': image_name
+							}
+						}
+					)
+					print('rek response: ', response)
+					similarity = response['FaceMatches'][0]['Similarity']
 
-					# if similarity > 95:
-					# 	reply(sender, 'Your FaceID was authenticated successfully')
-					# else:
-					# 	reply(sender, 'We didn\'t manage to authenticate your FaceID, please try again')
+					if similarity > 95:
+						reply(sender, 'Your FaceID was authenticated successfully')
+					else:
+						reply(sender, 'We didn\'t manage to authenticate your FaceID, please try again')
 
 					return 'ok'
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
