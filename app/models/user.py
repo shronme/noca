@@ -65,17 +65,17 @@ class User(Document):
 					similarity = response['FaceMatches'][0]['Similarity']
 					print('found faces')
 					if similarity > 85:
-						reply(self.name, 'Your FaceID was authenticated successfully')
+						reply(self.fb_id, 'Your FaceID was authenticated successfully')
 					else:
-						reply(self.name, 'We didn\'t manage to authenticate your FaceID, please try again')
+						reply(self.fb_id, 'We didn\'t manage to authenticate your FaceID, please try again')
 
 				else:
 					print('Did not find a similar face in the image')
-					reply(self.name, 'We didn\'t manage to authenticate your FaceID, please try again')
+					reply(self.fb_id, 'We didn\'t manage to authenticate your FaceID, please try again')
 			else:
-				reply(self.name, 'We didn\'t manage to find a face in the image')
+				reply(self.fb_id, 'We didn\'t manage to find a face in the image')
 		else:
-			reply(self.name, 'We didn\'t manage to find a face in the image')	
+			reply(self.fb_id, 'We didn\'t manage to find a face in the image')	
 
 
 	
