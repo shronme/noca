@@ -55,6 +55,7 @@ class WebhookView(MethodView):
 					s3 = boto3.resource('s3')
 					rek = boto3.client('rekognition', region_name='eu-west-1')
 					s3.Bucket('noca-auth-library').put_object(Key=image_name, Body=image)
+					target_obj = s3.Object('noca-auth-library',image_name).wait_until_exists()
 					source_image_name = '{name}/source/{name}-source.jpg'.format(name=user.name)
 					print('source name: ', source_image_name)
 					print('target name: ', image_name)
