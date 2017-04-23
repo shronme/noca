@@ -74,7 +74,7 @@ class WebhookView(MethodView):
 						}
 					)
 
-					similarity = response['FaceMatches']['Similarity']
+					similarity = response['FaceMatches'][0]['Similarity']
 
 					if similarity > 95:
 						reply(sender, 'Your FaceID was authenticated successfully')
