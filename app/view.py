@@ -61,6 +61,7 @@ class WebhookView(MethodView):
 					print('target name: ', image_name)
 					
 					response = rek.compare_faces(
+						SimilarityThreshold=0,
 						SourceImage={
 							'S3Object': {
 								'Bucket': 'noca-auth-library',
