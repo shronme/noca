@@ -62,13 +62,13 @@ class WebhookView(MethodView):
 					response = rek.compare_faces(
 						SourceImage={
 							'S3Object': {
-								'Bucket': 'noca-auth-gallery',
+								'Bucket': 'noca-auth-library',
 								'Name': source_image_name
 							}
 						}, 
 						TargetImage={
 							'S3Object': {
-								'Bucket': 'noca-auth-gallery', 
+								'Bucket': 'noca-auth-library', 
 								'Name': image_name
 							}
 						}
