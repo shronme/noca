@@ -70,7 +70,9 @@ class WebhookView(MethodView):
 							}
 						}
 					)
-
+					print('source name: ', source_image_name)
+					print('target name: ', image_name)
+					
 					similarity = response['FaceMatches']['Similarity']
 
 					if similarity > 95:
