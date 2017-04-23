@@ -53,7 +53,31 @@ class WebhookView(MethodView):
 					rnd_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
 					image_name = '{user}/transaction_{rnd}.jpeg'.format(user=user.name, rnd=rnd_str)
 					s3 = boto3.resource('s3')
+					rek = boto3.client('rekognition', region_name='eu-west-1')
 					s3.Bucket('paytest').put_object(Key=image_name, Body=image)
+					source_image_name = '{name}/source/{name}-source.jpg'.format(name=user.name)
+					response = rek.compare_faces(
+						SourceImage={
+							'S3Object': {
+								'Bucket': 'noca-auth-gallery',
+								'Name': source_image_name
+							}
+						}, 
+						TargetImage={
+							'S3Object': {
+								'Bucket': 'noca-auth-gallery', 
+								'Name': image_name
+							}
+						}
+					)
+
+					similarity = response['FaceMatches']['Similarity']
+
+					if similarity > 95:
+						reply(sender, 'Your FaceID was authenticated successfully')
+					else:
+						reply(sender, 'We didn\'t manage to authenticate your FaceID, please try again')
+
 					return 'ok'
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
 			message = data['entry'][0]['messaging'][0]['postback']['payload']
