@@ -19,7 +19,7 @@ class User(Document):
 		rek = boto3.client('rekognition', region_name='eu-west-1')
 	
 		rnd_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-		image_name = '{user}/auth/transaction_{rnd}.jpeg'.format(user=user.name, rnd=rnd_str)
+		image_name = '{user}/auth/transaction_{rnd}.jpeg'.format(user=self.name, rnd=rnd_str)
 
 		s3.Bucket('noca-auth-library').put_object(Key=image_name, Body=image)
 		target_obj = s3.Object('noca-auth-library',image_name).wait_until_exists()
@@ -38,7 +38,7 @@ class User(Document):
 
 		if len(face_detect['FaceDetails']) > 0:
 			if face_detect['FaceDetails'][0]['Confidence'] > 50:
-				source_image_name = '{name}/source/{name}-source.jpeg'.format(name=user.name)
+				source_image_name = '{name}/source/{name}-source.jpeg'.format(name=self.name)
 				print('source name: ', source_image_name)
 				print('target name: ', image_name)
 
