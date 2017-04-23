@@ -75,12 +75,19 @@ class WebhookView(MethodView):
 						}
 					)
 					print('rek response: ', response)
-					similarity = response['FaceMatches'][0]['Similarity']
+					try:
+						similarity = response['FaceMatches'][0]['Similarity']
+						print('found faces')
+						if similarity > 95:
+							reply(sender, 'Your FaceID was authenticated successfully')
+						else:
+							reply(sender, 'We didn\'t manage to authenticate your FaceID, please try again')
 
-					if similarity > 95:
-						reply(sender, 'Your FaceID was authenticated successfully')
-					else:
+					except IndexError:
+						print('Did not find a face in the image')
 						reply(sender, 'We didn\'t manage to authenticate your FaceID, please try again')
+
+					
 
 					return 'ok'
 		elif 'postback' in data['entry'][0]['messaging'][0].keys():
