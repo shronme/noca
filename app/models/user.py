@@ -3,6 +3,7 @@ import boto3
 import random
 import string
 from mongoengine import *
+from app.states.replies import reply
 
 class User(Document):
 	fb_id = StringField(required=True, unique=True)
