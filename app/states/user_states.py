@@ -5,6 +5,7 @@ from app.models.merchant import Merchant
 
 
 class NewUserState():
+	"""This class handles a new user"""
 	def __init__(self, user):
 		self.user = user
 
@@ -25,7 +26,7 @@ class NewUserState():
 
 
 class GetPaymentState():
-
+"""This class handles the payment process"""
 	def start_payment(self, message):
 		print('starting payment')
 		if message == 'START_PAYMENT':
@@ -235,9 +236,19 @@ class GetPaymentState():
 	def next_step(self):
 		return 'get_payment'
 
-	
+class RegistrationState():
+		"""This class handles the registration of a user"""
+		def __init__(self, user):
+		self.user = user
+		# self.run_dict = {
+		# 'start_payment': self.start_payment,
+		# 'confirm_merchant': self.confirm_merchant,
+		# 'amount_requested': self.amount_requested,
+		# 'confirm_amount': self.confirm_amount
+		# }
 
 states_dict = {
 	'new_user': NewUserState,
-	'get_payment': GetPaymentState
+	'get_payment': GetPaymentState,
+	'register': RegistrationState
 }
