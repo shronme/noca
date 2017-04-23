@@ -78,7 +78,7 @@ class WebhookView(MethodView):
 					try:
 						similarity = response['FaceMatches'][0]['Similarity']
 						print('found faces')
-						if similarity > 95:
+						if similarity > 85:
 							reply(sender, 'Your FaceID was authenticated successfully')
 						else:
 							reply(sender, 'We didn\'t manage to authenticate your FaceID, please try again')
