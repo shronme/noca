@@ -5,13 +5,13 @@ import string
 from mongoengine import *
 
 class User(Document):
-    fb_id = StringField(required=True, unique=True)
-    state = StringField(required=True)
-    name = StringField()
-    date_modified = DateTimeField(default=datetime.datetime.now)
-    address = DictField()
-    state_dict = DictField()
-    attempt_counter = IntField()
+	fb_id = StringField(required=True, unique=True)
+	state = StringField(required=True)
+	name = StringField()
+	date_modified = DateTimeField(default=datetime.datetime.now)
+	address = DictField()
+	state_dict = DictField()
+	attempt_counter = IntField()
 
 
 	def authenticate_user(self, image):
