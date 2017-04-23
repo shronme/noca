@@ -51,10 +51,10 @@ class WebhookView(MethodView):
 					img_req = requests.get(data['entry'][0]['messaging'][0]['message']['attachments'][0]['payload']['url'])
 					image = img_req.content
 					rnd_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-					image_name = '{user}/transaction_{rnd}.jpeg'.format(user=user.name, rnd=rnd_str)
+					image_name = '{user}/auth/transaction_{rnd}.jpeg'.format(user=user.name, rnd=rnd_str)
 					s3 = boto3.resource('s3')
 					rek = boto3.client('rekognition', region_name='eu-west-1')
-					s3.Bucket('paytest').put_object(Key=image_name, Body=image)
+					s3.Bucket('noca-auth-library').put_object(Key=image_name, Body=image)
 					source_image_name = '{name}/source/{name}-source.jpg'.format(name=user.name)
 					print('source name: ', source_image_name)
 					print('target name: ', image_name)
